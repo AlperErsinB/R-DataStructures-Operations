@@ -1,0 +1,401 @@
+#Listelerde eleman secimi
+list(1,2,3,4)
+list(c(1,2,3) , 'A' , 10)
+
+x <- list(11,12 , c('A' , 'B' , 'C') )
+
+x[1]
+x[[1]]
+
+class(x[1])
+class(x[[1]])
+
+x[3][2] # Null degerini verir
+
+x[[3]][2] # Dogru kullanim
+
+
+y <- list('A' = c(1,2,3,4) , 'B' = c(11,22,33,44))
+names(y)
+y
+y['A']
+class(y['A'])
+
+y[['A']]
+class(y[['A']])
+
+
+y$B
+y$A
+
+class(y$B)
+class(y$A)
+
+
+#listelerden eleman silme
+x <- list(1,2,3 , c(11,22,33))
+
+x[[1]] <- NULL
+
+x[[3]][-3]
+
+x[[3]] <- x[[3]][-3] #kalici olmasi icin atama yaptik
+x
+
+y <- list(c(1,2,3) , 'A' , 'B')
+
+y[[1]] <- NULL
+
+y[[1]] <- y[[1]][-2] 
+
+y <- list('A' = c(1,2,3) , 'B' = 2)
+
+y$A <- NULL
+y
+x[-1]
+x
+
+#liste elemanlarini degistirme
+x <- list(1,2,3,4)
+x[[2]] <- NULL
+x <- x[-2] 
+x
+
+x <- list('A' , 'B' , 'C' , 12 , 13, c(11,22,33,44))
+
+x[[2]] <- 'DD' 
+x[1] <- 'AA'
+
+x[[6]][4] <- 0
+x
+
+
+#Listelere eleman ekleme
+x <- list(11,12,13)
+
+# Eleman degistirme
+x[[2]] <- 15
+x
+
+
+#Yeni elaman ekleme
+
+x[4] <- 33
+x
+
+x[5] <- 34
+x
+
+x[[6]] <- 35
+x
+
+x[[7]] <- c(11,12,13,14)
+x
+
+x[8] <- c(11,12,13,14)
+x
+
+x[[8]] <- c(11,12,13,14)
+x
+
+x[[15]] <- 15
+x
+
+
+#Matrislerde Eleman Secimi
+
+# Matris olusturma
+m <- matrix(c(11,12,13,14) , nrow = 2 , ncol=2 , byrow = TRUE)
+
+
+# Matrislerde secim
+
+m1 <- matrix(c(12,22,34,45,45,56,57,68) , nrow=2 , ncol=4 , byrow=TRUE)
+
+m1
+
+# [1,] [,1] = [1,1]
+# Birinci satir ve birinci sutun
+
+m1[1,1]
+m1[2,4]
+m1[2,5] #boyle deger yok
+
+# Matrisin parcalarini secmek
+
+m1[c(1,2) , c(1,2)] #ilk arguman satir, ikinci sutun
+class(m1[c(1,2) , c(1,2)])
+
+m1[1:2,2:4]
+m1[c(1) , c(1,3,4)]
+
+
+
+
+#Dataframe Eleman Secimi
+df <- data.frame('A' = c(12,13,14,15,16) , 'B' = c('A' , 'B' , 'C' , 'D' , 'E'))
+
+df[1,1]
+df[1,2]
+
+df[,2]
+df[,1]
+df[5,]
+
+class(df[,2]) #ne tur bir cikti
+class(df[5,])
+
+df2 <- data.frame( 'A' = c(12,13,14,15,16) , 
+                   'B' = c('A' , 'B' , 'C' , 'D' , 'E'),
+                   'C' = c(45,23,67,89,24))
+
+df2
+
+df2[,c(2,3)] #2 ve 3. sutun
+class(df2[,c(2,3)]) #birden fazla secim yaptik dataframe olarak algilar
+
+df2[2]
+df2[1]
+class(df2[1])
+
+df2[['A']]
+df2[,1]
+
+class(df2[['A']])
+class(df2[,1])
+
+
+df2[,2] # Vektor
+df2[2] # Data frame
+df2['B'] # Data frame
+df2[['B']] # Vektor
+
+df2$A # vektor
+df2$B
+df2$C
+
+df2[c('A' , 'B')]
+df2[[c('A' ,'B')]] # Hatali yazim
+
+
+
+
+
+
+#Dataframe satir sutun kaldirma
+df <- data.frame('A' = c(1,2,3,4,5) , 'B' = c(4,5,6,7,8))
+df
+
+# ikinci sutunun cikartilmis secimi
+df[-2]
+df[-1]
+
+df[2]
+# Kaydetme kalici halde getirmek icin tekrar atama islemi
+df <- df[-2]
+df
+
+df <- data.frame('A' = c(1,2,3,4,5) , 'B' = c(4,5,6,7,8))
+
+df[,1]
+df[,-1]
+
+df[-1]
+
+df[2] <- NULL #
+df
+
+df <- data.frame('A' = c(1,2,3,4,5) , 'B' = c(4,5,6,7,8))
+df['A'] <- NULL
+df
+
+df <- data.frame('A' = c(1,2,3,4,5) , 
+                 'B' = c(4,5,6,7,8),
+                 'C' = c(11,222,32,41,54))
+
+df[-c(1,3)]
+df[,-c(1,3)] # Sonucu vektordur
+df[,-3] # Bu bir data frame olur
+
+df[c('A' ,'B')] <- NULL
+df
+
+
+df <- data.frame('A' = c(1,2,3,4,5) , 
+                 'B' = c(4,5,6,7,8),
+                 'C' = c(11,222,32,41,54))
+
+df <- df[-1,]
+df[1,]
+
+df[-c(2:4) ,]
+df[-c(1,4),]
+
+
+
+
+
+#DataFrame Eleman Degeri Degistirme
+df <- data.frame('A' = c(1,2,3,4) , 'B' = c(4,5,6,7))
+df
+
+df[1,2]
+df[2,2]
+
+df[1,2] <- 20
+df
+
+df[2,2] <- 21
+df
+
+df[c(3,4) , 2 ] <- 35
+df
+
+df[1, c(1,2)] <- 35
+
+df[1, c(1,2)] <- c(22,44)
+df
+
+df[ c(3,4), 1] <- c(33,44)
+df
+
+
+
+
+#DataFramede yeni satir sutun ekleme
+
+df <- data.frame('A' = c(1,2,3,4) , 
+                 'B' = c('A' , 'B' , 'C' , 'D'),
+                 'C' = c(11,22,33,44))
+
+
+cbind(df , 'D' = c(33,44,55,66)) #cbind sutun ekler
+df
+df <- cbind(df , 'D' = c(33,44,55,66))
+df
+
+df[5] <- c(12,13,14,15)
+df
+df$Yeni <- c('F' , 'G' , 'H' , 'Z')
+df
+
+df['Yeni2'] <- c(1,2,3,4)
+df
+
+# Yeni satir ekleme 
+
+df[5 , ] <- c(1,2,3,4,5,6 , 7)
+df
+df[6 , ] <- c(1,'A',3,4,5,6 , 7)
+df
+
+df[5,2] <- 'T'
+df
+class(df[,2])
+
+df[7 , ] <- c(1,'C',3,4,5,6 , 7)
+df
+df[5,2] <- 'A'
+df
+class(df$Yeni)
+
+df
+rbind(df , data.frame('A' = c(1) , 'B' = c('C') , 
+                      'C' = c(23) , 'D' = c(13) , 'V5' = c(23),
+                      'Yeni'= c('F') , 'Yeni2' = c(13) ))
+
+rbind(df , data.frame('A' = c(1 ,2) , 'B' = c('C' ,'A') , 
+                      'C' = c(23 ,24) , 'D' = c(13 ,14) , 'V5' = c(23 , 24),
+                      'Yeni'= c('F' ,'A') , 'Yeni2' = c(13 , 14) ))
+
+eklenecek <- data.frame('A' = c(1 ,2) , 'B' = c('C' ,'A') , 
+                        'C' = c(23 ,24) , 'D' = c(13 ,14) , 'V5' = c(23 , 24),
+                        'Yeni'= c('F' ,'A') , 'Yeni2' = c(13 , 14) )
+
+eklenecek
+
+rbind(df , eklenecek)
+
+eklenecek <- data.frame('A' = c(1 ,2) , 'B' = c('C' ,'T') , 
+                        'C' = c(23 ,24) , 'D' = c(13 ,14) , 'V5' = c(23 , 24),
+                        'Yeni'= c('F' ,'A') , 'Yeni2' = c(13 , 14) )
+
+df <- rbind(df , eklenecek)
+
+
+eklenecekSutun <- data.frame('J' = c(1,2,3,4,5,6,7,8,9) , 'E' = c(1,2,3,4,5,6,7,8,9))
+eklenecekSutun
+
+cbind(df , eklenecekSutun)
+
+
+
+
+##Tekrar
+# Vektor Eleman Secimi
+x[1] 
+
+# VEktor Eleman Cikartma
+x[-1]
+
+# VEktor Eleman Ekleme
+x[5] <- 14
+
+#List eleman secimi
+l[1]
+l[[1]]
+l[[4]][1]
+
+# Liste eleman Cikartma
+l[1] <- NULL
+l[[2]] <- NULL
+
+# Liste Eleman Ekleme
+l[3] <- 5
+l[[4]] <- 5
+
+# Matris eleman Secimi
+m[1,2]
+
+# Matris eleman Cikartma
+m[,-2]
+m[-1,]
+
+# Matrislerde eleman ekleme
+cbind(m, c(1,2,3))
+rbind(m , c(1,2,3,4))
+
+# Kaydetmek icin tekrar atama
+m <- cbind(m, c(1,2,3))
+m <- rbind(m , c(1,2,3,4 ,5))
+
+# Data Frame Eleman Secimi
+df[1,1]
+df[2,1]
+
+# Data Frame Satir sutun cikartma 
+df[-1]
+df[,-1] # Eger iki sutun varsa virgulle cikartma yapilmaz
+
+df[1] <- NULL
+df[,1] <- NULL
+
+df <- data.frame('A' = c(1,2,3,4) , 
+                 'B' = c('A' , 'B' , 'C' , 'D'),
+                 'C' = c(11,22,33,44))
+
+df[-1, ]
+df[-2, ]
+
+df <- df[-2, ] # Kaydetmek icin tekrar atama yapilmasi gerek
+
+# Deger degistirme
+
+df[1,1] 
+df[1,1] <- 144
+df
+
+df[4] <- c(1,2,3) 
+cbind(df , 'F' =c(1,2,3))
+cbind(df , data.frame('A1' = c(1,2,3)))
+rbind(df , data.frame('A' = c(1) , 'B' = c('D') , 'C' = c(12) , 'V4' = c(2) ))
